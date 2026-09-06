@@ -12,7 +12,7 @@ def find_emulator_window(title_keyword):
        for w in gw.getAllTitles():
            if w.strip():
                 print(f" - {w}")
-           return None
+       return None
 
     win = windows[0]
     print(f"✅ Found window: '{win.title}'")

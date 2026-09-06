@@ -24,11 +24,17 @@ def calculate_rotation_score(slot_combination):
         score -= 100
     if char_data[0] and char_data[0].get("guard_active", False):
         score += 50 # this is to favor tanks
+    if char_data[0]:
+        # Dodge and damage reduction also make a unit safer in slot 1
+        score += int(char_data[0].get("dodge_chance", 0.0) * 60)
+        score += int(char_data[0].get("damage_reduction", 0.0) * 100)
+        if char_data[0].get("counter", False):
+            score += 15
 
     return score
 
 def get_optimal_movement(current_rotation):
-    all_options + list(permutations(current_rotation))
+    all_options = list(permutations(current_rotation))
     best_option = all_options[0]
     best_score = -9999
 
